@@ -1,6 +1,6 @@
 eslintrc.json
 tsconfig.json
-prettierrc.json
+.prettierrc
 package.json
 package-lock.json
 readme.md

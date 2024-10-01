@@ -1,0 +1,36 @@
+echo '🏗️👷 Preparing your project for deployment: Styling, Testing, and Building before committing.'
+
+# Check Prettier standards
+npm run check-format ||
+(
+  echo '❗ Prettier Check Failed: Your code formatting does not meet the required standards.
+      Please run "npm run format", review the changes, and try committing again.';
+  false;
+)
+
+# Check ESLint standards
+npm run check-lint ||
+(
+  echo '⚠️ ESLint Check Failed: Your code contains linting issues.
+      Please review and resolve the issues above, then try committing again.';
+  false; 
+)
+
+# Check TypeScript configuration
+npm run check-types ||
+(
+  echo '❌ TypeScript Check Failed: There are type errors in your code.
+      Please fix the highlighted issues above and try again.';
+  false;
+)
+
+# Build the project
+npm run build ||
+(
+  echo '🚫 Build Failed: Unable to successfully build the project.
+      Please resolve the issues above before proceeding.';
+  false;
+)
+
+# If everything passes, proceed with the commit
+echo '✅ All checks passed successfully. Proceeding with commit.'
