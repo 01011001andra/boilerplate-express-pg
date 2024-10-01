@@ -3,8 +3,7 @@ import 'dotenv/config'
 import appMiddleware from './middlewares'
 
 const app: Application = express()
-const port: number =
-  process.env.PORT != null ? parseInt(process.env.PORT) : 5000
+const port: number = process.env.PORT != null ? parseInt(process.env.PORT) : 5000
 
 app.use(appMiddleware)
 
