@@ -1,7 +1,9 @@
-import { Router } from 'express'
+import { Router, type Request, type Response } from 'express'
 
-const router = Router()
+const barangRouter = Router()
 
-router.route('/examples')
+barangRouter.get('/examples', (req: Request, res: Response) => {
+  res.json({ status: true })
+})
 
-export default router
+export default barangRouter
