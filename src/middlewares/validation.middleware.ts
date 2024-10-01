@@ -5,12 +5,16 @@ import { StatusCodes } from 'http-status-codes'
 export function validation(schema: AnyZodObject) {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse(req.body)
+      schema.parse({
+        body: req.body,
+        query: req.query,
+        params: req.params
+      })
       next()
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessages = error.errors.map((issue) => ({
-          [`${issue.path.join('.')}`]: issue.message
+          [`${issue.path[1]}`]: issue.message
         }))
         res.status(StatusCodes.BAD_REQUEST).json({ status: 'error', message: 'Invalid Data', details: errorMessages })
       } else {
