@@ -5,10 +5,10 @@ export const createExample = async (
   req: Request<unknown, unknown, CreateExampleInput['body']>,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<any> => {
   const { name, type } = req.body
   try {
-    res.status(200).json({
+    return res.status(200).json({
       info: 'success',
       data: {
         doc: { name, type }
@@ -21,9 +21,9 @@ export const createExample = async (
   }
 }
 
-export const getAllExample = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getAllExample = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
-    res.status(200).json({
+    return res.status(200).json({
       info: 'success',
       data: {
         docs: [''],
@@ -45,10 +45,10 @@ export const getOneExample = async (
   req: Request<GetExampleInput['params']>,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<any> => {
   const { exampleId } = req.params
   try {
-    res.status(200).json({
+    return res.status(200).json({
       info: 'success',
       data: {
         doc: { exampleId },
@@ -70,11 +70,11 @@ export const updateExample = async (
   req: Request<UpdateExampleInput['params'], unknown, UpdateExampleInput['body']>,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<any> => {
   const { exampleId } = req.params
   const { name, type } = req.body
   try {
-    res.status(200).json({
+    return res.status(200).json({
       info: 'success',
       data: {
         doc: { exampleId, name, type }
@@ -91,10 +91,10 @@ export const deleteExample = async (
   req: Request<DeleteExampleInput['params']>,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+): Promise<any> => {
   const { exampleId } = req.params
   try {
-    res.status(200).json({
+    return res.status(200).json({
       info: 'success',
       data: {
         doc: { exampleId }

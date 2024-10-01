@@ -3,12 +3,13 @@ import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 
 export default [
-  { ignores: ['**/build/*', '**/node_modules/*', '**/public/*'] },
   {
-    files: ['**/*.{js,mjs,cjs,ts}']
+    ignores: ['**/build/*', '**/node_modules/*', '**/public/*']
   },
   {
+    files: ['**/*.{js,mjs,cjs,ts}'],
     languageOptions: {
+      parser: '@typescript-eslint/parser',
       globals: { ...globals.browser, ...globals.node },
       parserOptions: {
         warnOnUnsupportedTypeScriptVersion: false
@@ -16,5 +17,8 @@ export default [
     }
   },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended
+  ...tseslint.configs.recommended,
+  {
+    rules: { '@typescript-eslint/no-explicit-any': 'off' }
+  }
 ]
