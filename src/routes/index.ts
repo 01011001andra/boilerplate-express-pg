@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import examplesRouter from './examples.route'
+import examples_router from './examples.route'
 
 const app = Router()
 
-app.use('/api', examplesRouter)
+app.use('/api', examples_router)
 
 export default app

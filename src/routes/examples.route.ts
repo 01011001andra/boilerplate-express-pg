@@ -1,9 +1,11 @@
 import { Router, type Request, type Response } from 'express'
+import { validation } from '../middlewares/validation.middleware'
+import { examplesSchema } from '../schemas/examples.schema'
 
-const barangRouter = Router()
+const examplesRouter = Router()
 
-barangRouter.get('/examples', (req: Request, res: Response) => {
+examplesRouter.get('/examples', validation(examplesSchema), (req: Request, res: Response) => {
   res.json({ status: true })
 })
 
-export default barangRouter
+export default examplesRouter
