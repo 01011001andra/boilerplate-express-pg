@@ -11,5 +11,5 @@ const port: number = process.env.PORT != null ? parseInt(process.env.PORT) : 500
 app.use(appMiddleware)
 
 app.listen(port, () => {
-  console.log(`Server is runnings at port ${port}`)
+  console.log(`Server is running at port ${port}`)
 })
