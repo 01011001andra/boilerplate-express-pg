@@ -1,8 +1,9 @@
-import { type Request, type Response } from 'express'
+import { type NextFunction, type Request, type Response } from 'express'
 import { logger } from '../utils/winston'
 
-export const errorHandling = (err: Error, req: Request, res: Response): void => {
-  const message = err.message.split(' - ')[0]
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const errorHandling = (err: Error, req: Request, res: Response, next: NextFunction): void => {
+  const message = err.message.split(' - ')[1]
   logger.error(err)
   res.status(500).json({
     error: message,
@@ -13,8 +14,8 @@ export const errorHandling = (err: Error, req: Request, res: Response): void => 
 
 export const notFound = (req: Request, res: Response): void => {
   res.status(404).json({
-    error: 'Endpoint Tidak Ditemukan',
-    message: 'Endpoint Tidak Ditemukan',
+    error: `Not found`,
+    message: `Http method ${req.method} for path ${req.originalUrl} notfound`,
     data: null
   })
 }

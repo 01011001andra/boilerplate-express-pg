@@ -18,7 +18,11 @@ export function validation(schema: AnyZodObject) {
         }))
         res.status(StatusCodes.BAD_REQUEST).json({ status: 'error', message: 'Invalid Data', details: errorMessages })
       } else {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ status: 'error', message: 'Internal Server Error' })
+        next(
+          new Error(
+            'Error pada file src/middlewares/validation.middleware.ts: validation - ' + String((error as Error).message)
+          )
+        )
       }
     }
   }

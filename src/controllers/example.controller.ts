@@ -7,9 +7,9 @@ export const createExample = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  // const { name, type } = req.body
+  const { name, type } = req.body
   try {
-    const result = await exampleService.create({ name: '', type: '' })
+    const result = await exampleService.create({ name: name, type: type })
 
     res.status(201).json({
       info: 'success',
@@ -18,9 +18,11 @@ export const createExample = async (
       }
     })
   } catch (error: Error | unknown) {
-    if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts: createExample - ' + error.message))
-    }
+    next(
+      new Error(
+        'Error pada file src/controllers/example.controller.ts: createExample - ' + String((error as Error).message)
+      )
+    )
   }
 }
 
@@ -37,10 +39,12 @@ export const getAllExample = async (req: Request, res: Response, next: NextFunct
         }
       }
     })
-  } catch (error) {
-    if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts: getAllExample - ' + error.message))
-    }
+  } catch (error: Error | unknown) {
+    next(
+      new Error(
+        'Error pada file src/controllers/example.controller.ts: getAllExample - ' + String((error as Error).message)
+      )
+    )
   }
 }
 
@@ -62,10 +66,12 @@ export const getOneExample = async (
         }
       }
     })
-  } catch (error) {
-    if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts: getOneExample - ' + error.message))
-    }
+  } catch (error: Error | unknown) {
+    next(
+      new Error(
+        'Error pada file src/controllers/example.controller.ts: getOneExample - ' + String((error as Error).message)
+      )
+    )
   }
 }
 
@@ -84,9 +90,11 @@ export const updateExample = async (
       }
     })
   } catch (error: Error | unknown) {
-    if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts: updateExample - ' + error.message))
-    }
+    next(
+      new Error(
+        'Error pada file src/controllers/example.controller.ts: updateExample - ' + String((error as Error).message)
+      )
+    )
   }
 }
 
@@ -104,8 +112,10 @@ export const deleteExample = async (
       }
     })
   } catch (error: Error | unknown) {
-    if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts: deleteExample - ' + error.message))
-    }
+    next(
+      new Error(
+        'Error pada file src/controllers/example.controller.ts: deleteExample - ' + String((error as Error).message)
+      )
+    )
   }
 }

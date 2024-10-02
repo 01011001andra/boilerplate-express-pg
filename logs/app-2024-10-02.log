@@ -8,4 +8,54 @@
  [LOGGER] 2024-10-02 08:13:42.166 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
  [LOGGER] 2024-10-02 08:13:45.737 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
  [LOGGER] 2024-10-02 08:13:46.315 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
- [LOGGER] 2024-10-02 08:15:20.247 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:15:20.247 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint [LOGGER] 2024-10-02 10:49:56.354 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:49:58.438 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:49:59.703 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:50:39.382 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:52:20.280 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:55:02.987 AM error : uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1817:16)
+    at listenInCluster (node:net:1865:12)
+    at Server.listen (node:net:1953:7)
+    at Function.listen (D:\project\template project\express-ts\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (D:\project\template project\express-ts\src\index.ts:13:5)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (D:\project\template project\express-ts\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\project\template project\express-ts\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+ [LOGGER] 2024-10-02 10:56:13.083 AM error : uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1817:16)
+    at listenInCluster (node:net:1865:12)
+    at Server.listen (node:net:1953:7)
+    at Function.listen (D:\project\template project\express-ts\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (D:\project\template project\express-ts\src\index.ts:13:5)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (D:\project\template project\express-ts\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\project\template project\express-ts\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+ [LOGGER] 2024-10-02 10:57:14.387 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:58:10.812 AM error : [object Object]
+ [LOGGER] 2024-10-02 10:59:39.996 AM error : [object Object]
+ [LOGGER] 2024-10-02 11:01:19.282 AM error : [object Object]
+ [LOGGER] 2024-10-02 11:01:19.293 AM error : uncaughtException: res.status is not a function
+TypeError: res.status is not a function
+    at D:\project\template project\express-ts\src\controllers\error.controller.ts:7:7
+    at Generator.next (<anonymous>)
+    at D:\project\template project\express-ts\src\controllers\error.controller.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\project\template project\express-ts\src\controllers\error.controller.ts:4:12)
+    at errorHandling (D:\project\template project\express-ts\src\controllers\error.controller.ts:4:95)
+    at Layer.handle [as handle_request] (D:\project\template project\express-ts\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\project\template project\express-ts\node_modules\express\lib\router\index.js:328:13)
+    at D:\project\template project\express-ts\node_modules\express\lib\router\index.js:286:9
+    at param (D:\project\template project\express-ts\node_modules\express\lib\router\index.js:365:14)
+ [LOGGER] 2024-10-02 11:12:12.334 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 11:12:41.080 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 11:12:42.097 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 11:13:09.964 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 11:16:12.889 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 11:16:31.441 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
