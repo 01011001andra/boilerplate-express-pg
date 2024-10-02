@@ -59,3 +59,16 @@ TypeError: res.status is not a function
  [LOGGER] 2024-10-02 11:13:09.964 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
  [LOGGER] 2024-10-02 11:16:12.889 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
  [LOGGER] 2024-10-02 11:16:31.441 AM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 02:56:31.675 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "'8ccc07af-9461-44a6-81de-1d16896b7db1"
+ [LOGGER] 2024-10-02 02:56:44.942 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "28ccc07af-9461-44a6-81de-1d16896b7db1"
+ [LOGGER] 2024-10-02 02:57:00.375 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "g8ccc07af-9461-44a6-81de-1d16896b7db1"
+ [LOGGER] 2024-10-02 02:58:17.167 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "d8ccc07af-9461-44a6-81de-1d16896b7db1"
+ [LOGGER] 2024-10-02 02:58:22.148 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db11"
+ [LOGGER] 2024-10-02 03:02:04.077 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1d"
+ [LOGGER] 2024-10-02 03:02:05.231 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1d"
+ [LOGGER] 2024-10-02 03:02:33.117 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1asd"
+ [LOGGER] 2024-10-02 03:02:33.872 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1asd"
+ [LOGGER] 2024-10-02 03:02:55.646 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1asd"
+ [LOGGER] 2024-10-02 03:03:24.085 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1asd"
+ [LOGGER] 2024-10-02 03:09:39.706 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d1689zb7db1"
+ [LOGGER] 2024-10-02 05:21:37.393 PM error : Error pada file src/controllers/example.controller.ts: findUniqueExample - invalid input syntax for type uuid: "asd"

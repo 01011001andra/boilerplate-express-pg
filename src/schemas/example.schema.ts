@@ -17,7 +17,7 @@ const payload = {
   })
 }
 
-const params = {
+const findUniqueParams = {
   params: z.object({
     exampleId: z.string({
       required_error: 'exampleId is required'
@@ -25,21 +25,33 @@ const params = {
   })
 }
 
+const findManyQuery = {
+  query: z.object({
+    page: z.string().optional(),
+    limit: z.string().optional(),
+    search: z.string().optional()
+  })
+}
+
 export const createExampleSchema = z.object({
   ...payload
 })
-export const getExampleSchema = z.object({
-  ...params
+export const findUniqueExampleSchema = z.object({
+  ...findUniqueParams
+})
+export const findManyExampleSchema = z.object({
+  ...findManyQuery
 })
 export const updateExampleSchema = z.object({
-  ...params,
+  ...findUniqueParams,
   ...payload
 })
 export const deleteExampleSchema = z.object({
-  ...params
+  ...findUniqueParams
 })
 
 export type CreateExampleInput = z.infer<typeof createExampleSchema>
-export type GetExampleInput = z.infer<typeof getExampleSchema>
+export type FindUniqueExampleInput = z.infer<typeof findUniqueExampleSchema>
+export type FindManyExampleInput = z.infer<typeof findManyExampleSchema>
 export type UpdateExampleInput = z.infer<typeof updateExampleSchema>
 export type DeleteExampleInput = z.infer<typeof deleteExampleSchema>

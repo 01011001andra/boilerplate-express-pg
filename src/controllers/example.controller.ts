@@ -1,5 +1,11 @@
 import { type NextFunction, type Request, type Response } from 'express'
-import { CreateExampleInput, DeleteExampleInput, GetExampleInput, UpdateExampleInput } from '../schemas/example.schema'
+import {
+  CreateExampleInput,
+  DeleteExampleInput,
+  FindUniqueExampleInput,
+  FindManyExampleInput,
+  UpdateExampleInput
+} from '../schemas/example.schema'
 import exampleService from '../services/example.service'
 
 export const createExample = async (
@@ -26,50 +32,52 @@ export const createExample = async (
   }
 }
 
-export const getAllExample = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const findAllExample = async (
+  req: Request<object, object, object, FindManyExampleInput['query']>,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { limit = '10', page = '1', search = '' } = req.query
+
   try {
+    const result = await exampleService.findMany({ limit, page, search })
+
     res.status(200).json({
       info: 'success',
       data: {
-        docs: [''],
-        pagination: {
-          currentPage: 0,
-          totalPages: 0,
-          total: 0
-        }
+        datas: [limit, page, search],
+        docs: result.docs,
+        pagination: result.pagination
       }
     })
   } catch (error: Error | unknown) {
     next(
       new Error(
-        'Error pada file src/controllers/example.controller.ts: getAllExample - ' + String((error as Error).message)
+        'Error pada file src/controllers/example.controller.ts: findAllExample - ' + String((error as Error).message)
       )
     )
   }
 }
 
-export const getOneExample = async (
-  req: Request<GetExampleInput['params']>,
+export const findUniqueExample = async (
+  req: Request<FindUniqueExampleInput['params']>,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   const { exampleId } = req.params
   try {
+    const result = await exampleService.findUnique({ exampleId })
+
     res.status(200).json({
       info: 'success',
       data: {
-        doc: { exampleId },
-        pagination: {
-          currentPage: 0,
-          totalPages: 0,
-          total: 0
-        }
+        doc: result
       }
     })
   } catch (error: Error | unknown) {
     next(
       new Error(
-        'Error pada file src/controllers/example.controller.ts: getOneExample - ' + String((error as Error).message)
+        'Error pada file src/controllers/example.controller.ts: findUniqueExample - ' + String((error as Error).message)
       )
     )
   }
