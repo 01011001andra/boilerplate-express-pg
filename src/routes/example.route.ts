@@ -17,7 +17,6 @@ import {
 const examplesRouter = Router()
 
 examplesRouter.route('/examples').get(getAllExample).post(validation(createExampleSchema), createExample)
-
 examplesRouter
   .route('/examples/:exampleId')
   .get(validation(getExampleSchema), getOneExample)

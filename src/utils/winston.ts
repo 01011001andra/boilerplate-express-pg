@@ -2,7 +2,7 @@ import winston from 'winston'
 import 'winston-daily-rotate-file'
 
 const transport = new winston.transports.DailyRotateFile({
-  filename: 'logs/app-%DATE%.log',
+  filename: './logs/app-%DATE%.log',
   datePattern: 'YYYY-MM-DD',
   zippedArchive: true,
   maxSize: '1m',
@@ -11,13 +11,15 @@ const transport = new winston.transports.DailyRotateFile({
   handleExceptions: true
 })
 
-const logger = winston.createLogger({
+export const logger = winston.createLogger({
   level: 'silly',
   format: winston.format.combine(
+    winston.format.json({ space: 2 }),
     winston.format.timestamp({
       format: 'YYYY-MM-DD hh:mm:ss.SSS A'
     }),
-    winston.format.label({ label: '[LOGGER]' })
+    winston.format.label({ label: '[LOGGER]' }),
+    winston.format.printf((info) => ` ${info.label} ${info.timestamp} ${info.level} : ${info.message}`)
   ),
   transports: [
     new winston.transports.Console({
@@ -28,5 +30,3 @@ const logger = winston.createLogger({
     transport
   ]
 })
-
-export default logger

@@ -1,29 +1,32 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import { CreateExampleInput, DeleteExampleInput, GetExampleInput, UpdateExampleInput } from '../schemas/example.schema'
+import exampleService from '../services/example.service'
 
 export const createExample = async (
   req: Request<unknown, unknown, CreateExampleInput['body']>,
   res: Response,
   next: NextFunction
-): Promise<any> => {
-  const { name, type } = req.body
+): Promise<void> => {
+  // const { name, type } = req.body
   try {
-    return res.status(200).json({
+    const result = await exampleService.create({ name: '', type: '' })
+
+    res.status(201).json({
       info: 'success',
       data: {
-        doc: { name, type }
+        doc: result
       }
     })
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts' + error.message))
+      next(new Error('Error pada file src/controllers/example.controller.ts: createExample - ' + error.message))
     }
   }
 }
 
-export const getAllExample = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+export const getAllExample = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    return res.status(200).json({
+    res.status(200).json({
       info: 'success',
       data: {
         docs: [''],
@@ -36,7 +39,7 @@ export const getAllExample = async (req: Request, res: Response, next: NextFunct
     })
   } catch (error) {
     if (error instanceof Error) {
-      next(new Error('Error at file src/controllers/examples.controller.ts: ' + error.message))
+      next(new Error('Error pada file src/controllers/example.controller.ts: getAllExample - ' + error.message))
     }
   }
 }
@@ -45,10 +48,10 @@ export const getOneExample = async (
   req: Request<GetExampleInput['params']>,
   res: Response,
   next: NextFunction
-): Promise<any> => {
+): Promise<void> => {
   const { exampleId } = req.params
   try {
-    return res.status(200).json({
+    res.status(200).json({
       info: 'success',
       data: {
         doc: { exampleId },
@@ -61,7 +64,7 @@ export const getOneExample = async (
     })
   } catch (error) {
     if (error instanceof Error) {
-      next(new Error('Error at file src/controllers/examples.controller.ts: ' + error.message))
+      next(new Error('Error pada file src/controllers/example.controller.ts: getOneExample - ' + error.message))
     }
   }
 }
@@ -70,11 +73,11 @@ export const updateExample = async (
   req: Request<UpdateExampleInput['params'], unknown, UpdateExampleInput['body']>,
   res: Response,
   next: NextFunction
-): Promise<any> => {
+): Promise<void> => {
   const { exampleId } = req.params
   const { name, type } = req.body
   try {
-    return res.status(200).json({
+    res.status(200).json({
       info: 'success',
       data: {
         doc: { exampleId, name, type }
@@ -82,7 +85,7 @@ export const updateExample = async (
     })
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts' + error.message))
+      next(new Error('Error pada file src/controllers/example.controller.ts: updateExample - ' + error.message))
     }
   }
 }
@@ -91,10 +94,10 @@ export const deleteExample = async (
   req: Request<DeleteExampleInput['params']>,
   res: Response,
   next: NextFunction
-): Promise<any> => {
+): Promise<void> => {
   const { exampleId } = req.params
   try {
-    return res.status(200).json({
+    res.status(200).json({
       info: 'success',
       data: {
         doc: { exampleId }
@@ -102,7 +105,7 @@ export const deleteExample = async (
     })
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      next(new Error('Error pada file src/controllers/example.controller.ts' + error.message))
+      next(new Error('Error pada file src/controllers/example.controller.ts: deleteExample - ' + error.message))
     }
   }
 }

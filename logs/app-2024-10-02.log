@@ -1,0 +1,11 @@
+ [LOGGER] 2024-10-02 08:11:11.917 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:11:23.560 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:11:25.134 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:11:27.054 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:13:26.808 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:13:36.790 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:13:41.207 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:13:42.166 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:13:45.737 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:13:46.315 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
+ [LOGGER] 2024-10-02 08:15:20.247 AM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "id" of relation "support" violates not-null constraint
