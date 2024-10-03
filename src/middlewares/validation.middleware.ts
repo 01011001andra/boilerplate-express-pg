@@ -16,13 +16,9 @@ export function validation(schema: AnyZodObject) {
         const errorMessages = error.errors.map((issue) => ({
           [`${issue.path[1]}`]: issue.message
         }))
-        res.status(StatusCodes.BAD_REQUEST).json({ status: 'error', message: 'Invalid Data', details: errorMessages })
+        res.status(StatusCodes.BAD_REQUEST).json({ info: 'error', message: 'Invalid Data', data: errorMessages })
       } else {
-        next(
-          new Error(
-            'Error pada file src/middlewares/validation.middleware.ts: validation - ' + String((error as Error).message)
-          )
-        )
+        next(new Error('Error pada file src/middlewares/validation.middleware.ts: validation - ' + String((error as Error).message)))
       }
     }
   }

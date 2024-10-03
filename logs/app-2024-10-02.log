@@ -72,3 +72,11 @@ TypeError: res.status is not a function
  [LOGGER] 2024-10-02 03:03:24.085 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d16896b7db1asd"
  [LOGGER] 2024-10-02 03:09:39.706 PM error : Error pada file src/controllers/example.controller.ts: getOneExample - invalid input syntax for type uuid: "8ccc07af-9461-44a6-81de-1d1689zb7db1"
  [LOGGER] 2024-10-02 05:21:37.393 PM error : Error pada file src/controllers/example.controller.ts: findUniqueExample - invalid input syntax for type uuid: "asd"
+ [LOGGER] 2024-10-02 07:16:09.648 PM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 07:16:22.392 PM error : Error pada file src/controllers/example.controller.ts: createExample - relation "example" does not exist
+ [LOGGER] 2024-10-02 07:19:30.351 PM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "description" of relation "examples" violates not-null constraint
+ [LOGGER] 2024-10-02 07:19:51.176 PM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "description" of relation "examples" violates not-null constraint
+ [LOGGER] 2024-10-02 07:20:58.198 PM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "description" of relation "examples" violates not-null constraint
+ [LOGGER] 2024-10-02 07:21:57.235 PM error : Error pada file src/controllers/example.controller.ts: createExample - null value in column "description" of relation "examples" violates not-null constraint
+ [LOGGER] 2024-10-02 07:22:31.606 PM error : Error pada file src/controllers/example.controller.ts: createExample - INSERT has more target columns than expressions
+ [LOGGER] 2024-10-02 07:35:19.721 PM error : Error pada file src/controllers/example.controller.ts: createExample - relation "examples" does not exist

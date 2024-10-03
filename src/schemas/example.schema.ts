@@ -13,7 +13,13 @@ const payload = {
         required_error: 'Type is required',
         invalid_type_error: 'Type should be alphabet'
       })
-      .min(1, { message: 'Type cannot be empty' })
+      .min(1, { message: 'Type cannot be empty' }),
+    description: z
+      .string({
+        required_error: 'Description is required',
+        invalid_type_error: 'Description should be alphabet'
+      })
+      .min(1, { message: 'Description cannot be empty' })
   })
 }
 
