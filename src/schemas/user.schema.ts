@@ -23,12 +23,22 @@ const loginPayload = {
   })
 }
 
+const verifyEmailParam = {
+  params: z.object({
+    token: z.string()
+  })
+}
+
 export const registerUserSchema = z.object({
   ...registerPayload
 })
 export const loginUserSchema = z.object({
   ...loginPayload
 })
+export const verifyEmailSchema = z.object({
+  ...verifyEmailParam
+})
 
 export type RegisterUserInput = z.infer<typeof registerUserSchema>
 export type LoginUserInput = z.infer<typeof loginUserSchema>
+export type VerifyEmailParam = z.infer<typeof verifyEmailSchema>

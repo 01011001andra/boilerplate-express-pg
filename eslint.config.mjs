@@ -19,6 +19,15 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    rules: { '@typescript-eslint/no-explicit-any': 'error' }
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        0,
+        {
+          varsIgnorePattern: '^_', // Ignore variables prefixed with `_`
+          argsIgnorePattern: '^_' // Ignore arguments prefixed with `_`
+        }
+      ]
+    }
   }
 ]

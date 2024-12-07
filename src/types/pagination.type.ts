@@ -5,7 +5,7 @@ export interface PaginationType {
 }
 
 export interface PaginationQueryType {
-  limit: string
-  page: string
+  limit: number
+  page: number
   search: string
 }

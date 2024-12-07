@@ -13,17 +13,16 @@ export const createExample = async (req: Request<unknown, unknown, CreateExample
         doc: result
       }
     })
-  } catch (error: Error | unknown) {
+  } catch (error) {
     next(new Error('Error pada file src/controllers/example.controller.ts: createExample - ' + String((error as Error).message)))
   }
 }
 
 export const findAllExample = async (req: Request<object, object, object, FindManyExampleInput['query']>, res: Response, next: NextFunction): Promise<void> => {
-  const { limit = '10', page = '1', search = '' } = req.query
+  const { limit, page, search } = req.query
 
   try {
-    const result = await exampleService.findMany({ limit, page, search })
-    console.log(result)
+    const result = await exampleService.findMany({ limit: limit ? parseInt(limit) : 10, page: page ? parseInt(page) : 1, search: search || '' })
 
     res.status(200).json({
       info: 'success',
@@ -32,7 +31,7 @@ export const findAllExample = async (req: Request<object, object, object, FindMa
         pagination: result.pagination
       }
     })
-  } catch (error: Error | unknown) {
+  } catch (error) {
     next(new Error('Error pada file src/controllers/example.controller.ts: findAllExample - ' + String((error as Error).message)))
   }
 }
@@ -48,7 +47,7 @@ export const findUniqueExample = async (req: Request<FindUniqueExampleInput['par
         doc: result
       }
     })
-  } catch (error: Error | unknown) {
+  } catch (error) {
     next(new Error('Error pada file src/controllers/example.controller.ts: findUniqueExample - ' + String((error as Error).message)))
   }
 }
@@ -65,7 +64,7 @@ export const updateExample = async (req: Request<UpdateExampleInput['params'], u
         doc: result
       }
     })
-  } catch (error: Error | unknown) {
+  } catch (error) {
     next(new Error('Error pada file src/controllers/example.controller.ts: updateExample - ' + String((error as Error).message)))
   }
 }
@@ -84,7 +83,7 @@ export const deleteExample = async (req: Request<DeleteExampleInput['params']>, 
         doc: result
       }
     })
-  } catch (error: Error | unknown) {
+  } catch (error) {
     next(new Error('Error pada file src/controllers/example.controller.ts: deleteExample - ' + String((error as Error).message)))
   }
 }

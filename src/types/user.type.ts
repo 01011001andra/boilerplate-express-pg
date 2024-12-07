@@ -25,3 +25,4 @@ export type UserDelete = (params: { id: string }) => Promise<UserType>
 
 export type UserRegister = (params: Pick<UserType, 'email' | 'password'>) => Promise<Pick<UserType, 'email' | 'role'>>
 export type UserLogin = (params: Pick<UserType, 'email' | 'password'>) => Promise<Pick<UserType, 'email' | 'role' | 'email_verified'>>
+export type VerifyEmail = (params: Pick<UserType, 'email'>) => Promise<Pick<UserType, 'email' | 'role' | 'email_verified'>>

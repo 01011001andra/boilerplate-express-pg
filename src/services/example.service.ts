@@ -15,15 +15,33 @@ const create: ExampleCreate = async ({ name, type, description }) => {
 }
 
 const findMany: ExampleFindMany = async ({ limit, page, search }) => {
-  const query = `SELECT * FROM examples;`
-  const limitInt = parseInt(limit)
-  const pageInt = parseInt(page)
+  const searchTerm = `%${search}%`
 
-  console.log(limitInt, pageInt, search)
+  const offset = (page - 1) * limit
 
-  const result = await db.query(query)
+  const queryTotal = `
+    SELECT *
+    FROM examples
+    WHERE name ILIKE $1;
+  `
+  const queryTotalData = [searchTerm]
+  const totalDataQuery = await db.query(queryTotal, queryTotalData)
 
-  return { docs: result.rows, pagination: { currentPage: 0, total: 0, totalPages: 0 } }
+  const query = `
+    SELECT *
+    FROM examples
+    WHERE name ILIKE $3
+    LIMIT $1 OFFSET $2;`
+
+  const queryData = [limit, offset, searchTerm]
+
+  const result = await db.query(query, queryData)
+
+  const totalData = totalDataQuery.rowCount || 0
+
+  const totalPages = Math.ceil(totalData / limit) || 1
+
+  return { docs: result.rows, pagination: { currentPage: page, total: totalData, totalPages: totalPages } }
 }
 
 const findUnique: ExampleFindUnique = async ({ id }) => {

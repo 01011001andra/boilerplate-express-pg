@@ -2,8 +2,10 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import { type NextFunction, type Request, type Response } from 'express'
-import { LoginUserInput, RegisterUserInput } from '../schemas/user.schema'
+import { LoginUserInput, RegisterUserInput, VerifyEmailParam } from '../schemas/user.schema'
 import userService from '../services/user.service'
+import sendEmail from '../utils/nodemailer'
+import { generateAccessToken, generateRefreshToken } from '../utils/jwt'
 
 export const registerUser = async (req: Request<object, object, RegisterUserInput['body']>, res: Response, next: NextFunction): Promise<void> => {
   const { email, password, confirmPassword } = req.body
@@ -33,8 +35,8 @@ export const registerUser = async (req: Request<object, object, RegisterUserInpu
         doc: result
       }
     })
-  } catch (error: Error | unknown) {
-    next(new Error('Error pada file src/controllers/user.controller.ts: registerUser - ' + String((error as Error).message)))
+  } catch (error) {
+    next(new Error(`Error pada file src/controllers/user.controller.ts: registerUser - ${String(error as Error)}`))
   }
 }
 
@@ -45,22 +47,20 @@ export const loginUser = async (req: Request<object, object, LoginUserInput['bod
     const result = await userService.findUniqueEmail({ email })
 
     if (!result) {
-      res.status(400).json({ info: 'error', message: 'Wrong email or password!', data: null })
+      res.status(400).json({ info: 'error', message: 'Invalid email or password!', data: null })
       return
     }
 
     const comparePassword = await bcrypt.compare(password, result.password)
 
     if (!comparePassword) {
-      res.status(400).json({ info: 'error', message: 'Wrong email or password!', data: null })
+      res.status(400).json({ info: 'error', message: 'Invalid email or password!', data: null })
       return
     }
-    const token = jwt.sign(result, process.env.SECRET_KEY as string, {
-      expiresIn: 300
-    })
-
+    const accessToken = generateAccessToken({ user: result, expiresIn: 3600 })
+    const refreshToken = generateRefreshToken({ user: result, expiresIn: 3600 * 5 })
     if (!result.email_verified) {
-      console.log(token)
+      sendEmail(accessToken)
       res.status(403).json({ info: 'error', message: 'Email not verified. Please check your inbox email to verified!', data: null })
       return
     }
@@ -68,10 +68,46 @@ export const loginUser = async (req: Request<object, object, LoginUserInput['bod
     res.status(200).json({
       info: 'Success',
       data: {
-        doc: { token }
+        doc: { accessToken, refreshToken }
       }
     })
   } catch (error) {
-    next(new Error('Error pada file src/controllers/user.controller.ts: registerUser - ' + String((error as Error).message)))
+    next(new Error(`Error pada file src/controllers/user.controller.ts: loginUser - ${String(error as Error)}`))
+  }
+}
+
+export const verifyEmail = async (req: Request<VerifyEmailParam['params']>, res: Response, next: NextFunction): Promise<void> => {
+  const { token } = req.params
+
+  try {
+    jwt.verify(token, process.env.TOKEN_KEY as string, async (err, decoded) => {
+      if (err) {
+        res.status(400).json({
+          info: 'error',
+          message: err.message,
+          data: null
+        })
+        return
+      }
+      if (decoded) {
+        const user = await userService.findUniqueEmail({ email: (decoded as { email: string }).email })
+        if (user.email_verified) {
+          res.status(400).json({
+            info: 'error',
+            message: 'Email already verified',
+            data: null
+          })
+          return
+        }
+
+        const result = await userService.verifyEmail({ email: (decoded as { email: string }).email })
+        res.status(200).json({
+          info: 'success',
+          data: result
+        })
+      }
+    })
+  } catch (error) {
+    next(new Error(`Error pada file src/controllers/user.controller.ts: verifyEmail - ${String(error as Error)}`))
   }
 }

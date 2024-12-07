@@ -1,0 +1,8 @@
+CREATE TABLE courses (
+	id uuid DEFAULT uuid_generate_v4() NOT NULL,
+	slug varchar(255) UNIQUE NOT NULL,
+	instructor_id UUID NOT NULL,
+	created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	PRIMARY KEY (id)
+)
