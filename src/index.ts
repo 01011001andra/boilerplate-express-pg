@@ -2,6 +2,7 @@ import express, { type Application } from 'express'
 import 'dotenv/config'
 import appMiddleware from './middlewares'
 import './configs/db'
+import './configs/oauth/google'
 
 const app: Application = express()
 const port: number = process.env.PORT != null ? parseInt(process.env.PORT) : 5000

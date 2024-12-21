@@ -71,7 +71,20 @@ const remove: UserDelete = async ({ id }) => {
   return result.rows[0]
 }
 
-const register: UserRegister = async ({ email, password }) => {
+const register: UserRegister = async ({ email, password, oauth }) => {
+  if (oauth) {
+    const query = `
+    INSERT INTO
+        users (email, email_verified)
+    VALUES
+        ($1, true)
+    RETURNING email, role,email_verified
+    `
+
+    const result = await db.query(query, [email])
+
+    return result.rows[0]
+  }
   const query = `
     INSERT INTO
         users (email, password)
@@ -88,7 +101,7 @@ const register: UserRegister = async ({ email, password }) => {
 const findUniqueEmail: UserFindUniqueEmail = async ({ email }) => {
   const query = `
     SELECT
-        first_name, last_name, email, email_verified, role, password
+        id, first_name, last_name, email, email_verified, role
     FROM
         users
     WHERE

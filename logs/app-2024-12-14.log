@@ -1,0 +1,5 @@
+ [LOGGER] 2024-12-14 01:11:05.522 AM error : Error pada file src/controllers/user.controller.ts: loginGoogleCallback - error: null value in column "email" of relation "users" violates not-null constraint
+ [LOGGER] 2024-12-14 01:12:04.202 AM error : Error pada file src/controllers/user.controller.ts: loginGoogleCallback - error: null value in column "email" of relation "users" violates not-null constraint
+ [LOGGER] 2024-12-14 01:12:29.022 AM error : Error pada file src/controllers/user.controller.ts: loginGoogleCallback - error: null value in column "email" of relation "users" violates not-null constraint
+ [LOGGER] 2024-12-14 01:13:42.016 AM error : Error pada file src/controllers/user.controller.ts: loginGoogleCallback - error: null value in column "email" of relation "users" violates not-null constraint
+ [LOGGER] 2024-12-14 01:20:50.269 AM error : Error pada file src/controllers/user.controller.ts: authjs - error: null value in column "email" of relation "users" violates not-null constraint

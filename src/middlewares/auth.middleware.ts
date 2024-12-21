@@ -34,6 +34,7 @@ export const protect = (role: ('admin' | 'mentor' | 'student')[]) => async (req:
       })
       return
     }
+    req.body.decoded_user = decoded
     next()
   })
   // } catch (error: unknown) {

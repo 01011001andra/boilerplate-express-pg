@@ -1,7 +1,7 @@
 import { PaginationQueryType, PaginationType } from './pagination.type'
 
 export interface UserType {
-  id: string
+  id?: string
   first_name: string
   last_name: string
   password: string
@@ -9,6 +9,7 @@ export interface UserType {
   address: string
   phone: string
   email: string
+  oauth?: boolean
   email_verified: boolean
   job_title: string
   role: 'admin' | 'mentor' | 'student'
@@ -19,10 +20,10 @@ export interface UserType {
 export type UserCreate = (params: Omit<UserType, 'id' | 'created_at' | 'updated_at'>) => Promise<Omit<UserType, 'password'>>
 export type UserFindMany = (params: PaginationQueryType) => Promise<{ docs: UserType[]; pagination: PaginationType }>
 export type UserFindUnique = (params: { id: string }) => Promise<UserType>
-export type UserFindUniqueEmail = (params: { email: string }) => Promise<Pick<UserType, 'email' | 'role' | 'email_verified' | 'password'>>
+export type UserFindUniqueEmail = (params: { email: string }) => Promise<Pick<UserType, 'email' | 'role' | 'email_verified' | 'password' | 'id'>>
 export type UserUpdate = (params: Omit<UserType, 'password' | 'created_at' | 'updated_at'>) => Promise<Omit<UserType, 'password'>>
 export type UserDelete = (params: { id: string }) => Promise<UserType>
 
-export type UserRegister = (params: Pick<UserType, 'email' | 'password'>) => Promise<Pick<UserType, 'email' | 'role'>>
+export type UserRegister = (params: Pick<UserType, 'email' | 'password' | 'oauth'>) => Promise<Pick<UserType, 'id' | 'email' | 'role' | 'email_verified'>>
 export type UserLogin = (params: Pick<UserType, 'email' | 'password'>) => Promise<Pick<UserType, 'email' | 'role' | 'email_verified'>>
 export type VerifyEmail = (params: Pick<UserType, 'email'>) => Promise<Pick<UserType, 'email' | 'role' | 'email_verified'>>

@@ -6,6 +6,116 @@ import { LoginUserInput, RegisterUserInput, VerifyEmailParam } from '../schemas/
 import userService from '../services/user.service'
 import sendEmail from '../utils/nodemailer'
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt'
+import { authorizationUrl, oauth2Client } from '../configs/oauth/google'
+import { google } from 'googleapis/build/src'
+
+export const loginGoogle = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    res.redirect(authorizationUrl)
+    return
+  } catch (error) {
+    next(new Error(`Error pada file src/controllers/user.controller.ts: loginGoogle - ${String(error as Error)}`))
+  }
+}
+
+export const loginGoogleCallback = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const { code } = req.query
+
+  try {
+    const { tokens } = await oauth2Client.getToken(String(code))
+    oauth2Client.setCredentials(tokens)
+
+    const oauth2 = google.oauth2({
+      auth: oauth2Client,
+      version: 'v2'
+    })
+
+    const { data } = await oauth2.userinfo.get()
+    if (!data) {
+      res.status(404).json({
+        info: 'error',
+        data: {
+          doc: data
+        }
+      })
+      return
+    }
+
+    const isEmailExist = await userService.findUniqueEmail({ email: String(data?.email) })
+    if (!isEmailExist) {
+      const result = await userService.register({ email: String(data.email), password: '', oauth: true })
+      const userDetail = await userService.findUniqueEmail({ email: String(result?.email) })
+
+      const accessToken = generateAccessToken({ user: userDetail, expiresIn: 3600 })
+      // console.log('AKUN BARU')
+
+      // res.status(201).json({
+      //   info: 'success',
+      //   data: {
+      //     doc: accessToken
+      //   }
+      // })
+      res.redirect(`http://localhost:3000/auth-success?token=${accessToken}`)
+
+      return
+    }
+    const accessToken = generateAccessToken({ user: isEmailExist, expiresIn: 3600 })
+    // res.status(200).json({
+    //   info: 'success',
+    //   data: {
+    //     doc: accessToken
+    //   }
+    // })
+
+    res.redirect(`http://localhost:3000/auth-success?token=${accessToken}`)
+    return
+  } catch (error) {
+    next(new Error(`Error pada file src/controllers/user.controller.ts: loginGoogleCallback - ${String(error as Error)}`))
+  }
+}
+export const authjs = async (req: Request<object, object, RegisterUserInput['body']>, res: Response, next: NextFunction): Promise<void> => {
+  const { email } = req.body
+  const { oauth } = req.query
+
+  try {
+    const isEmailExist = await userService.findUniqueEmail({ email })
+    if (!isEmailExist) {
+      const result = await userService.register({ email, password: '', oauth: Boolean(oauth) })
+
+      const accessToken = generateAccessToken({ user: result, expiresIn: 3600 })
+      res.status(201).json({
+        info: 'success',
+        data: {
+          doc: {
+            id: result.id,
+            new_account: true,
+            email_verified: result.email_verified,
+            role: result.role,
+            token: accessToken
+          }
+        }
+      })
+      return
+    }
+    const accessToken = generateAccessToken({ user: isEmailExist, expiresIn: 3600 })
+
+    res.status(201).json({
+      info: 'success',
+      data: {
+        doc: {
+          id: isEmailExist.id,
+          new_account: false,
+          email_verified: isEmailExist.email_verified,
+          role: isEmailExist.role,
+          token: accessToken
+        }
+      }
+    })
+    return
+  } catch (error) {
+    next(new Error(`Error pada file src/controllers/user.controller.ts: authjs - ${String(error as Error)}`))
+  }
+}
 
 export const registerUser = async (req: Request<object, object, RegisterUserInput['body']>, res: Response, next: NextFunction): Promise<void> => {
   const { email, password, confirmPassword } = req.body
@@ -109,5 +219,20 @@ export const verifyEmail = async (req: Request<VerifyEmailParam['params']>, res:
     })
   } catch (error) {
     next(new Error(`Error pada file src/controllers/user.controller.ts: verifyEmail - ${String(error as Error)}`))
+  }
+}
+
+export const getMe = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const result = await userService.findUniqueEmail({ email: req.body.decoded_user.email })
+    res.status(200).json({
+      info: 'success',
+      data: {
+        doc: result
+      }
+    })
+    return
+  } catch (error) {
+    next(new Error(`Error pada file src/controllers/user.controller.ts: loginUser - ${String(error as Error)}`))
   }
 }
